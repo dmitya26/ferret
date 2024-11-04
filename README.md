@@ -1,2 +1,1 @@
-# ferret
-FErreT (File Edit Tool)
+# FErreT (File Edit Tool)
