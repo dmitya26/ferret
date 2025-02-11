@@ -1,5 +1,7 @@
 """
-The following outlines very basically a prototype of a spec compliant json parser and marshaller/demarshaller. It works to essentially divide the file into two kinds of kv pairs, those that deepen the json structure, and those that don't, it does this while keeping track of which non-deepening kv pairs belong to which deepening kv pairs; say for example: 'hello':'hello' belongs to 'heyo'.
+The following outlines very basically a prototype of a json parser/marshaller. It works to essentially divide the file into two kinds of kv pairs, those that deepen the json structure, and those that don't, it does this while keeping track of which non-deepening kv pairs belong to which deepening kv pairs; say for example: 'hello':'hello' belongs to 'heyo'.
+
+WARNING: This is still pretty unstable and untested, there are definitely some issues with the datatypes. I just thought it was cool I finally figured out how to parse the general structure of the json file.
 """
 import re 
 import functools 
