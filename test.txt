@@ -1,0 +1,34 @@
+{                 -> enter unnamed
+
+
+	
+"hello":{          -> inside "hello"                  (detection: Is there a colon. Does it end with a left bracket.
+
+
+
+"world":"!",       -> world:! is inside "hello"        (detection: Is there a colon. Does it end with a right bracket or comma.)
+
+
+
+
+"yee":{           -> inside "hello" "yee"
+
+
+"haw":"who?",     -> haw:who? is inside "hello" "yee"
+
+
+"yay":"you!"      -> yay:you! is inside "hello" "yee"
+
+}},               -> exit "hello" "yee"
+
+
+
+
+
+"foo":{      -> inside "foo"
+
+"bar":"baz"  -> bar:baz is inside "foo"
+
+
+}}           -> exit "foo" unnamed.
+

@@ -1,5 +1,10 @@
 package main
 
+import (
+	"fmt"
+	"regexp"
+)
+
 /*
 { 0       // leftBracket is incremeneted  // idx stored on queue.
 	{ 1   // leftBracket is incrememented  // idx stored on queue.
@@ -16,23 +21,20 @@ package main
 If the length of the queue at the end is greater than zero, then call a syntax error at the indexes on the remaining values on the queue.
 */
 
-import (
-	"errors"
-	"fmt"
-	"strconv"
-	"strings"
-)
-
+/*
 type JsonPreprocessQueue struct {
 	leftBracket []int
 	pairs       [][]int
+	data        map[string][]int
 }
+*/
 
 type Json struct {
 	data  string
 	child *Json
 }
 
+/*
 func (j *JsonPreprocessQueue) queueGetPop() int {
 	result := j.leftBracket[len(j.leftBracket)-1]
 	j.leftBracket = j.leftBracket[:len(j.leftBracket)-1]
@@ -42,10 +44,10 @@ func (j *JsonPreprocessQueue) queueGetPop() int {
 func (j *JsonPreprocessQueue) queuePush(idx int) {
 	j.leftBracket = append(j.leftBracket, idx)
 }
+*/
 
-func resolveBrackets(arg string) (*JsonPreprocessQueue, error) {
-	j := &JsonPreprocessQueue{}
-
+/*
+func resolveBrackets(arg string, j *JsonPreprocessQueue) error {
 	for i := range arg {
 		if arg[i] == byte('{') {
 			j.queuePush(i)
@@ -62,30 +64,38 @@ func resolveBrackets(arg string) (*JsonPreprocessQueue, error) {
 			leftBracket[i] = strconv.Itoa(c)
 		}
 
-		return nil, errors.New(fmt.Sprintf("Unresolved bracket(s): ", strings.Join(leftBracket, ", ")))
+		return errors.New(fmt.Sprintf("Unresolved bracket(s): ", strings.Join(leftBracket, ", ")))
 	}
-	return j, nil
+	return nil
 }
 
-func ParseJson(raw string) (*Json, error) {
+func resolveData(arg string, j *JsonPreprocessQueue) error {
+	for i := range arg {
+		if arg[i]
+	}
+	return nil
+}
+*/
+
+func UnmarshalJson(raw string) (*Json, error) {
 	json := &Json{}
 
 	var preprocessed string
 	for i := range raw {
-		if raw[i] == byte(' ') || raw[i] == byte('\n') {
-			continue
+		if raw[i] != byte(' ') || raw[i] != byte('\n') {
+			preprocessed += string(raw[i])
 		}
-		preprocessed += string(raw[i])
 	}
-	jpq, err := resolveBrackets(preprocessed)
-	if err != nil {
-		return nil, err
+
+	re := regexp.MustCompile(`:\{|,\s*`)
+	preprocessed_split := re.Split(preprocessed, -1)
+	for i := range preprocessed_split {
+		fmt.Println(preprocessed_split[i])
 	}
-	fmt.Println(jpq.pairs)
 
 	return json, nil
 }
 
 func main() {
-	ParseJson("{{}{}{}}")
+	UnmarshalJson("{'heyo':{'hello':'hello'},'epic!':{},{}}")
 }
